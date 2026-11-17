@@ -14,7 +14,8 @@ public class JwtUtils {
     private static final String SECRET_KEY = "NuestraLlaveSecretaSuperSeguraParaLevelUpGamer2026!";
     private static final long EXPIRATION_TIME = 86400000; // 1 Día en milisegundos
 
-    private Key getSigningKey() {
+    // Cambiar de private a public
+    public Key getSigningKey() {
         return Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
     }
 
