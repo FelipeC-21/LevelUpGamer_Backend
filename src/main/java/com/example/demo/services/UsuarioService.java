@@ -3,6 +3,7 @@ package com.example.demo.services;
 import com.example.demo.models.Usuario;
 import com.example.demo.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,8 +27,12 @@ public class UsuarioService {
         return usuarioRepository.findByCorreo(correo);
     }
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public Usuario guardarUsuario(Usuario usuario) {
-        // Aquí a futuro encriptaremos la contraseña con BCrypt antes de guardar
+        // Encriptar la contraseña con BCrypt antes de guardar en MySQL
+        usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
         return usuarioRepository.save(usuario);
     }
 
