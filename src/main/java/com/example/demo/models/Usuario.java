@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Data // Lombok: Genera Getters, Setters y toString automáticamente
 @NoArgsConstructor
@@ -27,6 +29,7 @@ public class Usuario {
     @Column(nullable = false, unique = true, length = 100)
     private String correo;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(nullable = false)
     private String password;
 
@@ -40,6 +43,7 @@ public class Usuario {
     private String direccion;
 
     // Relación: Un usuario puede tener muchas boletas (compras)
+    @JsonIgnore
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<Boleta> boletas;
 }

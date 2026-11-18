@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Data
 @NoArgsConstructor
@@ -26,6 +27,7 @@ public class DetalleBoleta {
     private Integer subtotal;
 
     // Relación: Muchos detalles pertenecen a una boleta
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "boleta_id", nullable = false)
     private Boleta boleta;
