@@ -31,8 +31,9 @@ public class UsuarioService {
     private PasswordEncoder passwordEncoder;
 
     public Usuario guardarUsuario(Usuario usuario) {
-        // Encriptar la contraseña con BCrypt antes de guardar en MySQL
-        usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
+        if (usuario.getPassword() != null && !usuario.getPassword().startsWith("$2a$")) {
+            usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
+        }
         return usuarioRepository.save(usuario);
     }
 
